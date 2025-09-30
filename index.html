@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iBot Club: Deputy Coordinator Tenure Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: High-Contrast Black, White, and Red (Dark Theme) -->
+    <!-- Application Structure Plan: The SPA is designed as a vertical, scrollable narrative rather than a rigid report. It uses a sticky navigation bar (Overview, Curriculum, Timeline, Evaluation, Schedule) to allow users to jump between key information segments. The 'Curriculum' now reflects the added Python/Data/Vision components. A new '45-Day Schedule' section presents a detailed day-by-day plan using an expandable list structure, which is the most effective way to present a large volume of discrete dates and tasks clearly. The 'Timeline' chart has been adjusted for the new Dec 2025 - May 2026 dates. This structure prioritizes granular planning detail without cluttering the main view. -->
+    <!-- Visualization & Content Choices: 
+        1. Report Info: Key numbers (24 DCs, 6 groups). Goal: Inform. Viz: Large number stat cards. Interaction: None. Justification: Provides a quick, high-level summary. Library: HTML/Tailwind.
+        2. Report Info: Curriculum details for 3 verticals (now including Python, Pandas, NumPy, OpenCV). Goal: Organize/Inform. Viz: Three-column card layout. Interaction: Click to expand/collapse details. Justification: Prevents information overload by hiding complex details until requested. Library: Vanilla JS.
+        3. Report Info: Tenure phases and dates (adjusted for new 5-month span). Goal: Show Change/Progression. Viz: Horizontal bar chart (Gantt-style). Interaction: Tooltips on hover provide details. Justification: Visually represents duration and sequence. Library: Chart.js (Canvas).
+        4. Report Info: Detailed 45-day session plan. Goal: Inform/Organize. Viz: Accordion/Expandable list. Interaction: Click to toggle visibility. Justification: Presents a dense schedule clearly for quick reference. Library: Vanilla JS.
+        5. Report Info: Attendance calculation (50/50 split). Goal: Compare/Inform. Viz: Donut chart. Interaction: Tooltips on hover. Justification: Immediately communicates the equal weighting. Library: Chart.js (Canvas).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* near-black */
+            color: #e5e5e5; /* white/light gray */
+        }
+        .nav-link {
+            transition: color 0.2s, border-bottom-color 0.2s;
+        }
+        .nav-link.active {
+            color: #ef4444; /* red-500 */
+            border-bottom-color: #ef4444;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .donut-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        /* Chart tooltip styling for dark mode */
+        .chartjs-tooltip {
+            background: rgba(255, 255, 255, 0.9);
+            color: #0a0a0a;
+            border-radius: 4px;
+            padding: 8px;
+            pointer-events: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-900 shadow-xl sticky top-0 z-50 border-b border-red-900">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-white">iBot Club Tenure Plan</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Overview</a>
+                        <a href="#curriculum" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Curriculum</a>
+                         <a href="#schedule" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Schedule</a>
+                        <a href="#timeline" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Timeline</a>
+                        <a href="#evaluation" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Evaluation</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="overview" class="py-16 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-base font-semibold text-red-500 tracking-wide uppercase">iBot Club</h2>
+                <p class="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Deputy Coordinator Tenure Plan (Dec 2025 - Apr 2026)</p>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-400">
+                    This intensive program is designed to transform 24 Deputy Coordinators into versatile technical leaders across **Electronics, Software, and Mechanical design**. The plan integrates essential programming fundamentals with advanced robotics concepts, culminating in a final competition.
+                </p>
+                <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
+                        <p class="text-5xl font-extrabold text-red-500">24</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Deputy Coordinators</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
+                        <p class="text-5xl font-extrabold text-red-500">6</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Coordinator-led Groups</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
+                        <p class="text-5xl font-extrabold text-red-500">45</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Total Training Days</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
+                        <p class="text-5xl font-extrabold text-red-500">2</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Major Mini-Projects</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="curriculum" class="py-16 sm:py-24 bg-gray-900 border-y border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">The Three Core Verticals of Training</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+                        The curriculum has been refined to include fundamental Python libraries and Computer Vision for real-world robotics applications, ensuring a strong foundation for every coordinator.
+                    </p>
+                </div>
+
+                <div class="mt-12 grid gap-10 lg:grid-cols-3">
+                    <div class="curriculum-card bg-gray-800 rounded-xl shadow-xl p-6 flex flex-col cursor-pointer border border-red-900/50 transition duration-300 hover:shadow-red-500/70 hover:bg-gray-700 bg-gradient-to-br from-gray-800 to-neutral-900" data-target="electronics-details">
+                        <div class="flex items-center space-x-4">
+                             <div class="text-3xl">⚡️</div>
+                            <h3 class="text-2xl font-bold text-white">Electronics</h3>
+                        </div>
+                        <p class="mt-4 text-gray-400 flex-grow">From digital simulation to hands-on hardware, this track covers the essentials of circuit design and robotic control systems.</p>
+                        <ul id="electronics-details" class="mt-4 space-y-2 text-gray-300 hidden">
+                            <li><strong>Circuit Simulation:</strong> Wokwi & Tinkercad</li>
+                            <li><strong>Hands-on Robotics:</strong> 2-Wheel Drive Kits</li>
+                            <li><strong>Control Systems:</strong> Bluetooth Integration</li>
+                            <li><strong>Sensor Integration:</strong> Basic Sensor Labs</li>
+                        </ul>
+                        <div class="mt-4 text-red-500 font-semibold">Show Details &rarr;</div>
+                    </div>
+                    
+                    <div class="curriculum-card bg-gray-800 rounded-xl shadow-xl p-6 flex flex-col cursor-pointer border border-red-900/50 transition duration-300 hover:shadow-red-500/70 hover:bg-gray-700 bg-gradient-to-br from-gray-800 to-neutral-900" data-target="software-details">
+                         <div class="flex items-center space-x-4">
+                             <div class="text-3xl">💻</div>
+                            <h3 class="text-2xl font-bold text-white">Software (NEW FOCUS)</h3>
+                        </div>
+                        <p class="mt-4 text-gray-400 flex-grow">Building strong foundations in C++ for core algorithms, and Python for data analysis (Pandas/NumPy) and Computer Vision (OpenCV).</p>
+                         <ul id="software-details" class="mt-4 space-y-2 text-gray-300 hidden">
+                            <li><strong>Beginner Python:</strong> Fundamentals, Pandas, and NumPy</li>
+                            <li>**Computer Vision:** OpenCV for image processing</li>
+                            <li><strong>CLI Proficiency:</strong> Essential Linux Commands & OverTheWire Bandit Lvl 1-20</li>
+                            <li>**C++ Algorithms:** Graph Theory, Dijkstra's & A* (GeeksforGeeks)</li>
+                        </ul>
+                         <div class="mt-4 text-red-500 font-semibold">Show Details &rarr;</div>
+                    </div>
+
+                    <div class="curriculum-card bg-gray-800 rounded-xl shadow-xl p-6 flex flex-col cursor-pointer border border-red-900/50 transition duration-300 hover:shadow-red-500/70 hover:bg-gray-700 bg-gradient-to-br from-gray-800 to-neutral-900" data-target="mechanical-details">
+                        <div class="flex items-center space-x-4">
+                            <div class="text-3xl">⚙️</div>
+                            <h3 class="text-2xl font-bold text-white">Mechanical</h3>
+                        </div>
+                        <p class="mt-4 text-gray-400 flex-grow">Learn the principles of Computer-Aided Design (CAD), from basic parts to designing complex, integrated systems.</p>
+                        <ul id="mechanical-details" class="mt-4 space-y-2 text-gray-300 hidden">
+                            <li><strong>CAD Software:</strong> Fusion 360 Proficiency</li>
+                            <li><strong>Component Design:</strong> Sketching & Part Modeling</li>
+                            <li><strong>System Design:</strong> From Parts to Large Assemblies</li>
+                            <li><strong>Advanced Concept:</strong> Conceptual Engine Design</li>
+                        </ul>
+                         <div class="mt-4 text-red-500 font-semibold">Show Details &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-16 sm:py-24">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">45-Day Training Schedule (Dec 2025 - Jan 2026)</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+                       This section details the 9 training cycles (36 days of sessions + 9 days of gap/assignments) that will cover the core curriculum. Each Coordinator is responsible for 4-5 sessions. Click on any cycle to view its specific topic.
+                    </p>
+                </div>
+
+                <div id="schedule-container" class="mt-12 space-y-4 max-w-4xl mx-auto">
+                    <!-- Schedule items populated by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="timeline" class="py-16 sm:py-24 bg-gray-900 border-y border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Full Program Timeline</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+                       The full tenure, including the 15-day buffer period, is visualized below. Note the major evaluation checkpoint at the end of the Training Phase.
+                    </p>
+                </div>
+                <div class="mt-12 bg-gray-900 p-6 rounded-xl shadow-2xl border border-red-900/50">
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="evaluation" class="py-16 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Evaluation & Commitment</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+                        To ensure a high standard of skill and commitment, we have a clear and strict evaluation policy. Success in this program is based on active participation and timely completion of tasks.
+                    </p>
+                </div>
+                <div class="mt-12 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-2xl border border-red-900/50">
+                        <h3 class="text-2xl font-bold text-white text-center">Attendance Calculation</h3>
+                        <p class="text-center mt-2 text-gray-400">Weekly attendance is weighted equally between live session participation and assignment submission.</p>
+                         <div class="donut-chart-container mt-4">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-red-900/50 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-r from-gray-800 to-neutral-900">
+                            <h4 class="text-xl font-semibold text-white">Minimum Requirement</h4>
+                            <p class="mt-2 text-gray-400">A cumulative attendance of <strong class="text-red-500">below 75\%</strong> by **January 15th, 2026** will result in removal from the program. This policy is strictly enforced to maintain the cohort's quality and pace.</p>
+                        </div>
+                         <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-red-900/50 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-r from-gray-800 to-neutral-900">
+                            <h4 class="text-xl font-semibold text-white">Performance Leaderboard</h4>
+                            <p class="mt-2 text-gray-400">A points-based leaderboard will track performance. Your rank on **January 15th, 2026** determines your role and weightage in the final mini-projects, rewarding consistent effort and excellence.</p>
+                        </div>
+                         <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-red-900/50 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-r from-gray-800 to-neutral-900">
+                            <h4 class="text-xl font-semibold text-white">Session Structure</h4>
+                            <p class="mt-2 text-gray-400">Live sessions occur every 4 days. Each session is followed by a mandatory assignment with a 1-week deadline, ensuring a steady learning rhythm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500">&copy; 2025 iBot Club. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const SCHEDULE_DATA = [
+            { cycle: 1, topic: "Python Basics: Syntax, Data Types, and Control Flow (Beginner)", vertical: "Software", assigned: "Coord 1" },
+            { cycle: 2, topic: "Electronics: Wokwi & Tinkercad Circuit Simulation", vertical: "Electronics", assigned: "Coord 2" },
+            { cycle: 3, topic: "Mechanical: Fusion 360 Basic Sketching & Part Modeling", vertical: "Mechanical", assigned: "Coord 3" },
+            { cycle: 4, topic: "Software: Python Pandas & NumPy for Data Handling", vertical: "Software", assigned: "Coord 4" },
+            { cycle: 5, topic: "Electronics: 2WD Kit Overview & Bluetooth Control Setup", vertical: "Electronics", assigned: "Coord 5" },
+            { cycle: 6, topic: "Mechanical: Component Assembly & Joints in Fusion 360", vertical: "Mechanical", assigned: "Coord 6" },
+            { cycle: 7, topic: "Software: Introduction to C++ Fundamentals (Beginner)", vertical: "Software", assigned: "Coord 1" },
+            { cycle: 8, topic: "Electronics: Basic Sensor Interfacing (e.g., Ultrasonic)", vertical: "Electronics", assigned: "Coord 2" },
+            { cycle: 9, topic: "Software: Intro to Computer Vision with OpenCV (Python)", vertical: "Software", assigned: "Coord 3" },
+            { cycle: 10, topic: "Mechanical: Advanced System Design (Conceptual Engine)", vertical: "Mechanical", assigned: "Coord 4" },
+            { cycle: 11, topic: "Software: Linux CLI Essentials & Bandit Lvl 1-5 Solving", vertical: "Software", assigned: "Coord 5" },
+            { cycle: 12, topic: "Electronics: Advanced Control Systems & PID Concept", vertical: "Electronics", assigned: "Coord 6" },
+            { cycle: 13, topic: "Software: C++ Graph Theory Basics & Data Structures", vertical: "Software", assigned: "Coord 1" },
+            { cycle: 14, topic: "Software: Dijkstra's Algorithm Implementation (C++/Python)", vertical: "Software", assigned: "Coord 2" },
+            { cycle: 15, topic: "Software: A* Pathfinding Algorithm & Optimization", vertical: "Software", assigned: "Coord 3" },
+            { cycle: 16, topic: "Mechanical: Design Optimization and Stress Analysis Basics", vertical: "Mechanical", assigned: "Coord 4" },
+            { cycle: 17, topic: "Electronics: Complex Interfacing & troubleshooting", vertical: "Electronics", assigned: "Coord 5" },
+            { cycle: 18, topic: "Software: Bandit Lvl 6-20 Strategy & Advanced CLI", vertical: "Software", assigned: "Coord 6" },
+        ];
+
+        function populateSchedule() {
+            const container = document.getElementById('schedule-container');
+            let sessionDay = 0;
+            const sessionsPerCycle = 4; // Sessions per week, every 4 days
+            
+            SCHEDULE_DATA.forEach((item, index) => {
+                const sessionNumber = index + 1;
+                const sessionsPerCoord = 6;
+                const dayIncrement = 4; 
+                sessionDay += (sessionNumber === 1 ? 0 : dayIncrement); 
+                
+                const sessionBlock = document.createElement('div');
+                sessionBlock.classList.add('bg-gray-800', 'rounded-xl', 'shadow-xl', 'border', 'border-red-900/50', 'overflow-hidden');
+                
+                const header = document.createElement('div');
+                header.classList.add('flex', 'justify-between', 'items-center', 'p-4', 'cursor-pointer', 'hover:bg-gray-700', 'transition', 'duration-200');
+                header.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <span class="text-red-500 font-bold text-lg w-10 text-center">S${sessionNumber}</span>
+                        <div>
+                            <p class="text-sm text-gray-400 font-medium">Approx. Day ${sessionDay}</p>
+                            <h4 class="text-white font-semibold">${item.topic}</h4>
+                        </div>
+                    </div>
+                    <span class="text-red-500 text-lg transform transition duration-300">+</span>
+                `;
+                header.setAttribute('data-target', `details-${sessionNumber}`);
+
+                const details = document.createElement('div');
+                details.id = `details-${sessionNumber}`;
+                details.classList.add('p-4', 'bg-gray-700', 'hidden', 'border-t', 'border-red-900');
+                details.innerHTML = `
+                    <p class="text-sm"><strong class="text-red-400">Vertical:</strong> ${item.vertical}</p>
+                    <p class="text-sm"><strong class="text-red-400">Coordinator:</strong> ${item.assigned}</p>
+                    <p class="text-sm mt-2"><strong class="text-red-400">Assignment:</strong> Mandatory task due 7 days after the session.</p>
+                `;
+
+                sessionBlock.appendChild(header);
+                sessionBlock.appendChild(details);
+                container.appendChild(sessionBlock);
+
+                header.addEventListener('click', () => {
+                    details.classList.toggle('hidden');
+                    const arrow = header.querySelector('span:last-child');
+                    arrow.textContent = details.classList.contains('hidden') ? '+' : '−';
+                });
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            populateSchedule();
+            
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const curriculumCards = document.querySelectorAll('.curriculum-card');
+            curriculumCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const targetId = card.getAttribute('data-target');
+                    const details = document.getElementById(targetId);
+                    const arrowText = card.querySelector('.font-semibold');
+                    details.classList.toggle('hidden');
+                    if (details.classList.contains('hidden')) {
+                         arrowText.textContent = 'Show Details →';
+                    } else {
+                         arrowText.textContent = 'Hide Details ↑';
+                    }
+                });
+            });
+
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            new Chart(timelineCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phase I: Training', 'Phase II: Catch-up/Buffer', 'Phase III: Projects', 'Culmination: Competition'],
+                    datasets: [{
+                        label: 'Tenure Phases',
+                        data: [
+                            {x: ['2025-12-01', '2026-01-15'], y: 'Phase I: Training'},
+                            {x: ['2026-01-16', '2026-01-31'], y: 'Phase II: Catch-up/Buffer'},
+                            {x: ['2026-02-01', '2026-03-31'], y: 'Phase III: Projects'},
+                            {x: ['2026-04-01', '2026-04-30'], y: 'Culmination: Competition'},
+                        ],
+                        backgroundColor: ['#b91c1c', '#dc2626', '#fca5a5', '#fee2e2'], 
+                        borderColor: ['#991b1b', '#ef4444', '#f87171', '#fecaca'],
+                        borderWidth: 1,
+                        borderSkipped: false,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'month'
+                            },
+                            min: '2025-11-15',
+                            max: '2026-05-15',
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e5e5e5'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#e5e5e5'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#0a0a0a',
+                            bodyColor: '#0a0a0a',
+                            callbacks: {
+                                title: function(context) {
+                                    const point = context[0].raw.y;
+                                    let objective = '';
+                                    if(point === 'Phase I: Training') objective = 'Objective: Complete core curriculum (18 live sessions) and skill acquisition.';
+                                    if(point === 'Phase II: Catch-up/Buffer') objective = 'Objective: Reinforce concepts, utilize 15-day buffer, and conduct final evaluation for 75% attendance checkpoint.';
+                                    if(point === 'Phase III: Projects') objective = 'Objective: Apply skills in collaborative mini-projects (Weightage determined by Jan 15th leaderboard).';
+                                    if(point === 'Culmination: Competition') objective = 'Objective: Participate in the final club robotics competition.';
+                                    return objective;
+                                },
+                                label: function() {
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+            new Chart(attendanceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Live Session Attendance', 'Assignment Submission'],
+                    datasets: [{
+                        label: 'Attendance Weightage',
+                        data: [50, 50],
+                        backgroundColor: ['#dc2626', '#fca5a5'],
+                        borderColor: ['#991b1b', '#f87171'],
+                        borderWidth: 1,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#e5e5e5'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#0a0a0a',
+                            bodyColor: '#0a0a0a',
+                             callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
