@@ -61,6 +61,11 @@
         }
     </style>
 </head>
+
+<!-- Start -->
+
+<!-- Heading -->
+    
 <body class="antialiased">
 
     <header class="bg-gray-900 shadow-xl sticky top-0 z-50 border-b border-red-900">
@@ -73,7 +78,7 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#overview" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Overview</a>
                         <a href="#curriculum" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Curriculum</a>
-                         <a href="#schedule" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Schedule</a>
+                        <a href="#schedule" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Schedule</a>
                         <a href="#timeline" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Timeline</a>
                         <a href="#evaluation" class="nav-link px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 border-b-2 border-transparent">Evaluation</a>
                     </div>
@@ -82,11 +87,13 @@
         </nav>
     </header>
 
+    <!-- Overview -->
+    
     <main>
         <section id="overview" class="py-16 sm:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-base font-semibold text-red-500 tracking-wide uppercase">iBot Club</h2>
-                <p class="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Deputy Coordinator Tenure Plan (Dec 2025 - Mar 2026)</p>
+                <p class="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Deputy Coordinator Tenure Plan (2025-26)</p>
                 <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-400">
                     This intensive program is designed to transform 36 selected individuals into versatile technical leaders across Electronics, Software, and Mechanical design. The plan integrates essential programming fundamentals with advanced robotics concepts, culminating in a final project phase.
                 </p>
@@ -103,22 +110,24 @@
                     </div>
                     <!-- 3. Training Days -->
                     <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
-                        <p class="text-5xl font-extrabold text-red-500">62</p>
-                        <p class="mt-2 text-lg font-medium text-gray-200">Training Days (Phase I)</p>
+                        <p class="text-5xl font-extrabold text-red-500">60</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Training Days</p>
                     </div>
                     <!-- 4. Workshop -->
                     <div class="bg-gray-800 rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900">
                         <p class="text-5xl font-extrabold text-red-500">1</p>
-                        <p class="mt-2 text-lg font-medium text-gray-200">Workshop (Phase II)</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Workshop</p>
                     </div>
                     <!-- 5. 3 Major Mini-Projects (FULL WIDTH, STANDARD STYLE) -->
                     <div class="lg:col-span-4 flex flex-col justify-center rounded-xl shadow-2xl p-6 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-br from-gray-800 to-gray-900 h-36">
                         <p class="text-5xl font-extrabold text-red-500">3</p>
-                        <p class="mt-2 text-xl font-medium text-gray-200">Major Mini-Projects (Phase III)</p>
+                        <p class="mt-2 text-xl font-medium text-gray-200">Major Mini-Projects</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Curriculum -->
 
         <section id="curriculum" class="py-16 sm:py-24 bg-gray-900 border-y border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -152,10 +161,11 @@
                         </div>
                         <p class="mt-4 text-gray-400 flex-grow">A deep dive into Python (Pandas/NumPy/OpenCV), C++ algorithms (A*/Dijkstra), and AI models (Media Pipe).</p>
                          <ul id="software-details" class="mt-4 space-y-2 text-gray-300 hidden text-sm">
-                            <li><strong>Python Stack:</strong> Fundamentals, NumPy, Pandas, OpenCV, Media Pipe</li>
-                            <li><strong>C++ Algorithms:</strong> Basic Graph Theory, A-Star, and Dijkstra (GeeksforGeeks)</li>
-                            <li><strong>Advanced Python:</strong> Implementation of Tracking Modules</li>
-                            <li><strong>CLI/Security:</strong> Essential Linux Commands & OverTheWire Bandit Lvl 1-20</li>
+                            <li><strong>Basic Python:</strong> Fundamentals, NumPy, Pandas, OpenCV, Media Pipe</li>
+                            <li><strong>Basic C++:</strong> Fundamentals</li>
+                            <li><strong>Advanced Python:</strong> Implementation of Tracking Modules using OpenCV and Media Pipe</li>
+                            <li><strong>Advanced C++:</strong> Basic Graph Theory, Maze Solving Algorithms</li>
+                            <li><strong>Linux Commands:</strong> Essential Linux Commands & OverTheWire Bandit Lvl 1-20</li>
                         </ul>
                          <div class="mt-4 text-red-500 font-semibold">Show Details &rarr;</div>
                     </div>
@@ -167,9 +177,9 @@
                         </div>
                         <p class="mt-4 text-gray-400 flex-grow">Covers 3D design in Fusion 360, system integration using URDF, and model verification via advanced simulation.</p>
                         <ul id="mechanical-details" class="mt-4 space-y-2 text-gray-300 hidden text-sm">
-                            <li><strong>CAD:</strong> Comprehensive Fusion 360 Training</li>
-                            <li><strong>System Assembly:</strong> Joint Configuration & URDF File Creation</li>
-                            <li><strong>Simulation:</strong> Coppelia Sim Environment Setup (Mini Conda)</li>
+                            <li><strong>Fusion 360:</strong> Comprehensive Fusion 360 Training</li>
+                            <li><strong>URDF:</strong> Joint Configuration & URDF File Creation</li>
+                            <li><strong>Coppelia Sim:</strong> Coppelia Sim Environment Setup (Mini Conda)</li>
                         </ul>
                          <div class="mt-4 text-red-500 font-semibold">Show Details &rarr;</div>
                     </div>
@@ -182,7 +192,7 @@
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-white sm:text-4xl">15-Session Training Schedule (Dec 2025 - Jan 2026)</h2>
                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
-                       This section details the **15 required sessions** over the 62-day Training Phase (Phase I). Sessions occur every 4 days, followed by a mandatory 1-week assignment. Coordinators lead 2-3 sessions each.
+                       This section details the 15 training sessions over the 62-day Training Phase (Phase I). Sessions occur every 4 days, followed by a mandatory 1-week assignment. Coordinators lead 2-3 sessions each.
                     </p>
                 </div>
 
@@ -231,7 +241,7 @@
                         </div>
                          <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-red-900/50 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-r from-gray-800 to-neutral-900">
                             <h4 class="text-xl font-semibold text-white">Project Role Determination</h4>
-                            <p class="mt-2 text-gray-400">The Leaderboard ranking as of **February 28, 2026** (end of Workshop Phase), will determine the weightage, roles, and responsibilities DCs receive during the subsequent Mini-Project Phase (March 2026).</p>
+                            <p class="mt-2 text-gray-400">The Leaderboard ranking as of February 28, 2026 (end of Workshop Phase), will determine the weightage, roles, and responsibilities DCs receive during the subsequent Mini-Project Phase (March 2026).</p>
                         </div>
                          <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-red-900/50 transition duration-300 hover:shadow-red-500/50 bg-gradient-to-r from-gray-800 to-neutral-900">
                             <h4 class="text-xl font-semibold text-white">Session Structure</h4>
@@ -251,21 +261,22 @@
 
     <script>
         const SCHEDULE_DATA = [
-            { cycle: 1, topic: "Phase 0: Software Setup & Basic Python Check", vertical: "Initialization", assigned: "Coord 1" },
-            { cycle: 2, topic: "Python Basics: Syntax, Pandas & NumPy Intro", vertical: "Software", assigned: "Coord 2" },
-            { cycle: 3, topic: "Electronics: Wokwi, Tinkercad & Arduino Uno", vertical: "Electronics", assigned: "Coord 3" },
-            { cycle: 4, topic: "Mechanical: Fusion 360 Sketching & Part Modeling", vertical: "Mechanical", assigned: "Coord 4" },
-            { cycle: 5, topic: "Software: Applied Vision - OpenCV Fundamentals", vertical: "Software", assigned: "Coord 5" },
-            { cycle: 6, topic: "Electronics: ESP32 & 2WD Kit Overview", vertical: "Electronics", assigned: "Coord 6" },
-            { cycle: 7, topic: "Mechanical: URDF Files & System Assembly", vertical: "Mechanical", assigned: "Coord 1" },
-            { cycle: 8, topic: "Software: AI & Vision - Google Media Pipe Models", vertical: "Software", assigned: "Coord 2" },
-            { cycle: 9, topic: "Electronics: Sensor Interfacing & Motor Control", vertical: "Electronics", assigned: "Coord 3" },
-            { cycle: 10, topic: "Software: Intermediate Python - Tracking Modules", vertical: "Software", assigned: "Coord 4" },
-            { cycle: 11, topic: "Mechanical: Coppelia Sim Intro & Mini Conda Setup", vertical: "Mechanical", assigned: "Coord 5" },
-            { cycle: 12, topic: "Software: Beginner C++ & Basic Graph Theory (GeeksforGeeks)", vertical: "Software", assigned: "Coord 6" },
-            { cycle: 13, topic: "Software: Linux CLI Essentials & OverTheWire Bandit Lvl 1-10", vertical: "Software", assigned: "Coord 1" },
-            { cycle: 14, topic: "Software: Intermediate C++: Dijkstra's Algorithm", vertical: "Software", assigned: "Coord 2" },
-            { cycle: 15, topic: "Software: Intermediate C++: A* Pathfinding", vertical: "Software", assigned: "Coord 3" },
+            { cycle: 0, topic: "Phase 0: Software Setup", vertical: "Initialization", assigned: "Coord A" },
+            { cycle: 1, topic: "Software: Basic Python: Introduction to Python", vertical: "Software", assigned: "Coord A" },
+            { cycle: 2, topic: "Software: Basic Python: Pandas & NumPy Intro", vertical: "Software", assigned: "Coord A" },
+            { cycle: 3, topic: "Electronics: Tinkercad & Arduino Uno", vertical: "Electronics", assigned: "Coord B" },
+            { cycle: 4, topic: "Electronics: Wokwi & ESP32", vertical: "Electronics", assigned: "Coord B" },
+            { cycle: 5, topic: "Software: Basic Python: OpenCV Fundamentals", vertical: "Software", assigned: "Coord C" },
+            { cycle: 6, topic: "Mechanical: Fusion 360 Sketching", vertical: "Mechanical", assigned: "Coord D" },
+            { cycle: 7, topic: "Mechanical: URDF Files & System Assembly", vertical: "Mechanical", assigned: "Coord D" },
+            { cycle: 8, topic: "Software: Basic Python - Google Media Pipe Models", vertical: "Software", assigned: "Coord C" },
+            { cycle: 9, topic: "Software: Intermediate Python - Tracking Modules", vertical: "Software", assigned: "Coord C" },
+            { cycle: 10, topic: "Mechanical: Coppelia Sim Intro & Mini Conda Setup", vertical: "Mechanical", assigned: "Coord A" },
+            { cycle: 11, topic: "Software: Basic C++: Introduction", vertical: "Software", assigned: "Coord E" },
+            { cycle: 12, topic: "Software: Basic Graph Theory: Graph Traversal Algorithms", vertical: "Software", assigned: "Coord E" },
+            { cycle: 13, topic: "Software: Linux Commands & OverTheWire Bandit Lvl 1-10", vertical: "Software", assigned: "Coord D" },
+            { cycle: 14, topic: "Software: Intermediate C++: Dijkstra's Algorithm", vertical: "Software", assigned: "Coord D" },
+            { cycle: 15, topic: "Software: Intermediate C++: A* Pathfinding", vertical: "Software", assigned: "Coord D" },
         ];
 
         function populateSchedule() {
@@ -278,9 +289,9 @@
                 
                 // Calculate day: Phase 0 is 5 days, then sessions start every 4 days
                 if (item.vertical === 'Initialization') {
-                    sessionDay = 1; // Start on Day 1 (Nov 26) of the 5-day window
-                } else if (sessionNumber === 2) {
-                    sessionDay = 6; // Start of Phase I (Dec 1)
+                    sessionDay = 0; // Start on Day 1 (Nov 26) of the 5-day window
+                } else if (sessionNumber === 1) {
+                    sessionDay = 1; // Start of Phase I (Dec 1)
                 } else {
                     sessionDay += dayIncrement;
                 }
